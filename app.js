@@ -12,8 +12,8 @@ app.use(express.static(path.join(process.cwd(), "dist")));
 /* --------------------------------- Routes --------------------------------- */
 
 // данные в public/data
-app.get("/lines", sendLocalJsonData("lines"));
-app.get("/works", sendLocalJsonData("works"));
+app.get("/api/lines", sendLocalJsonData("lines"));
+app.get("/api/works", sendLocalJsonData("works"));
 
 /* -------------------------------------------------------------------------- */
 

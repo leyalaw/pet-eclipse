@@ -6,7 +6,7 @@
 export default {
   name: "App",
   async mounted() {
-    const response = await fetch("api/lines");
+    const response = await fetch("/api/lines");
     const lines = await response.json();
 
     console.log(lines);
