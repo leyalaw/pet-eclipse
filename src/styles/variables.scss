@@ -1,0 +1,84 @@
+@import "./create-property-placeholders";
+
+$breakpoints: (
+  "xs": 375px,
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1366px,
+);
+
+$font-names: "GothamPro", "Montserrat", "Firasans";
+
+$font-weigths: (
+  "regular": 400,
+  "bold": 700,
+);
+
+$text-sizes: (
+  biggest: 1.7rem,
+  big: 1.6rem,
+  medium: 1.4rem,
+  small: 1.3rem,
+  smallest: 1.2rem,
+);
+
+/* --------------------------------- Mixins --------------------------------- */
+
+@mixin mq($condition) {
+  $query: "";
+
+  @if type-of($condition) == map {
+    // если $condition - map
+    $rules: map.keys($condition);
+    $length: length($rules);
+
+    @for $i from 1 through $length {
+      $rule: nth($rules, $i);
+      $breakpoint: map.get($condition, $rule);
+
+      $query: $query +
+        "(#{$rule}: #{map.get($breakpoints, $breakpoint) or $breakpoint})";
+
+      @if $i < $length {
+        $query: $query + " and ";
+      }
+    }
+  } @else {
+    // если $condition - свойство $breakpoints
+    $query: "(max-width: #{map.get($breakpoints, $condition)})";
+  }
+
+  @media #{$query} {
+    @content;
+  }
+}
+
+// подключение шрифтов
+@mixin set-font($file-name, $font-name, $font-weight) {
+  @font-face {
+    font-family: $font-name;
+    font-display: swap;
+    src: url("@styles/fonts/#{$file-name}.woff") format("woff"),
+      url("@styles/fonts/#{$file-name}.woff2") format("woff2");
+    font-weight: #{$font-weight};
+    font-style: "normal";
+  }
+}
+
+/* ------------------------------ Placeholders ------------------------------ */
+
+// генерация placeholder-ов из названия шрифта и веса
+// (например, %GothamPro-regular)
+@each $fname in $font-names {
+  @each $fweight-name, $fweight-val in $font-weigths {
+    %#{$fname}-#{$fweight-name} {
+      font-family: $fname, sans-serif;
+      font-weight: $fweight-val;
+    }
+  }
+}
+
+// генерация placeholder-ов из размера текста
+// (например, %text-medium)
+@include create-property-placeholders($text-sizes, font-size, "text");

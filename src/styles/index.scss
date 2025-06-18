@@ -1,0 +1,79 @@
+/* ---------------------------------- Fonts --------------------------------- */
+
+@each $fname in $font-names {
+  @each $fweight-name, $fweight-val in $font-weigths {
+    // подключение шрифтов
+    @include set-font(#{$fname}-#{$fweight-name}, $fname, $fweight-val);
+  }
+}
+
+/* --------------------------------- General -------------------------------- */
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+
+  @include mq(lg) {
+    font-size: 9.5px;
+  }
+  @include mq(md) {
+    font-size: 9px;
+  }
+}
+
+#app {
+  position: relative;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  outline: none;
+}
+
+input {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+
+  &::placeholder {
+    color: inherit;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.wrapper {
+  width: 1180px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  @include mq(xl) {
+    width: 90%;
+    min-width: 300px;
+  }
+}

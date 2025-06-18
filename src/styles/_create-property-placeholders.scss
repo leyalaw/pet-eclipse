@@ -1,0 +1,43 @@
+/**
+ * Генерация placeholder-ов:
+ * 
+ * @example
+ * @include create-property-placeholders(
+ *  (key1: a, key2: (subkey1: b, subkey2: c)), 
+ *  property, 
+ *  prefix
+ * );
+ * // %prefix-key1 {
+ * //   property: a;
+ * // }
+ * // %prefix-key2-subkey1 {
+ * //   property: b;
+ * // }
+ * // %prefix-key2-subkey2 {
+ * //   property: c;
+ * // }
+ */
+@mixin create-property-placeholders($map, $property, $prefix: "") {
+  $final-prefix: if($prefix == "", "", "#{$prefix}-");
+
+  @include _recurse-property-map($map, $property, $final-prefix);
+}
+
+@mixin _recurse-property-map($map, $property, $final-prefix: "", $name: "") {
+  @each $key, $value in $map {
+    $new-name: if($name == "", $key, "#{$name}-#{$key}");
+
+    @if type-of($value) == map {
+      @include _recurse-property-map(
+        $value,
+        $property,
+        $final-prefix,
+        $new-name
+      );
+    } @else {
+      %#{$final-prefix}#{$new-name} {
+        #{$property}: $value;
+      }
+    }
+  }
+}
