@@ -20,6 +20,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
     "nodemon": "^3.1.10",
+    "sass-embedded": "^1.89.2",
     "vite": "^6.3.5"
   }
 }
