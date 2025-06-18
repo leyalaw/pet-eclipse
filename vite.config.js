@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@": resolve("./src"),
         "@styles": resolve("./src/styles"),
+        "@views": resolve("./src/views"),
       },
     },
     css: {
