@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "development"
+  },
+  {
+    "id": 2,
+    "name": "design"
+  },
+  {
+    "id": 3,
+    "name": "bussiness"
+  },
+  {
+    "id": 4,
+    "name": "arts"
+  }
+]
