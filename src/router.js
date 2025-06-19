@@ -1,7 +1,7 @@
 // основное
 import { createRouter, createWebHistory } from "vue-router";
 // страницы
-import HomePage from "@views/Home.vue";
+import HomePage from "@views/Home/index";
 import EmptyPage from "@views/404.vue";
 
 /* -------------------------------------------------------------------------- */
@@ -22,7 +22,7 @@ const currentRoutes = [
 ];
 
 // все отсутствующие страницы ведут в 404
-const routes = currentRoutes.map(route =>
+const routes = currentRoutes.map((route) =>
   route.component
     ? route
     : {
