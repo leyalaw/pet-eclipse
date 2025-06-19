@@ -2,11 +2,11 @@
 import { defineComponent, h, computed } from "vue";
 import { useStore } from "vuex";
 // компоненты
-import CtaContent from "@views/home/01_cta";
-import DesignContent from "@views/home/02_design";
-import FeaturesContent from "@views/home/03_features";
-import GuidelinesContent from "@views/home/04_guidelines";
-import FinalContent from "@views/home/05_final";
+import CtaContent from "@views/Home/01_cta";
+import DesignContent from "@views/Home/02_design";
+import FeaturesContent from "@views/Home/03_features";
+import GuidelinesContent from "@views/Home/04_guidelines";
+import FinalContent from "@views/Home/05_final";
 
 /* -------------------------------------------------------------------------- */
 /*                              Домашняя страница                             */
