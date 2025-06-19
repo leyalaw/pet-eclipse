@@ -28,10 +28,14 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "@": resolve("./src"),
+        "@assets": resolve("./src/assets"),
         "@baseComponents": resolve("./src/components/base"),
+        "@buttonTemplates": resolve("./src/components/templates/buttons"),
         "@directives": resolve("./src/directives"),
+        "@sectionTemplates": resolve("./src/components/templates/sections"),
         "@styles": resolve("./src/styles"),
         "@views": resolve("./src/views"),
+        "@viewStyles": resolve("./src/styles/views"),
       },
     },
     css: {

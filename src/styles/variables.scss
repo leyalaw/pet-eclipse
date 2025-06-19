@@ -23,8 +23,51 @@ $text-sizes: (
   smallest: 1.2rem,
 );
 
+$colors: (
+  object: (
+    primary: #8500d2,
+    secondary: #27c7c5,
+    detail: (
+      accent: #000000,
+      additional: #ffffff,
+    ),
+  ),
+  text: (
+    primary: #ffffff,
+    secondary: (
+      default: #74797e,
+      accent: #333b42,
+      additional: #8297a7,
+    ),
+  ),
+);
+
+$default-size-coefficients: (
+  lg: 0.8,
+  md: 0.7,
+);
+
+$durations: (
+  long: 2s,
+  calm: 1s,
+  short: 0.5s,
+);
+
+$default-transition-duration: map.get($durations, short);
+
 /* --------------------------------- Mixins --------------------------------- */
 
+/**
+* Миксин для создания медиа-запросов
+* @param {Map|String} $condition - условие медиа-запроса:
+* 
+* @example
+*
+* @include mq(md) -> @media (max-width: 768px)
+*
+* @include mq((min-height: 375px, min-width: md)) -> 
+* -> @media (min-height: 375px) and (min-width: 768px)
+*/
 @mixin mq($condition) {
   $query: "";
 
@@ -66,6 +109,117 @@ $text-sizes: (
   }
 }
 
+/**
+ * Центрирование элементов флекс-блоков
+ *
+ * @param {String} $axis - ось центрирования: 
+ * x, y, "" (по умолчанию - по обеим осям)
+ * @param {String} $direction - направление оси: 
+ * row (по умолчанию), column
+ */
+@mixin set-flex-center($axis: "", $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+
+  $properties: (
+    x: justify-content,
+    y: align-items,
+  );
+
+  @if $direction == column {
+    $properties: (
+      x: align-items,
+      y: justify-content,
+    );
+  }
+
+  //   если нет уточнений по оси,
+  //   то центририрование по обеим осям
+  @if $axis != y {
+    #{map.get($properties, x)}: center;
+  }
+  @if $axis != x {
+    #{map.get($properties, y)}: center;
+  }
+}
+
+/**
+ * Вычисление центра по стороне
+ * (чтобы не "занимать" transform)
+ *
+ * @param {Number} $size - величина стороны
+ */
+@function get-center($size) {
+  @return calc(50% - ($size / 2));
+}
+
+/**
+ * Установка меняющегося размером свойства
+ *
+ * @param {String} $value - значение свойства по умолчанию
+ * @param {String} $property - свойство
+ * @param {Map} $coefficients - брейкоинты и коэффициенты
+ */
+@mixin set-responsive-property(
+  $value,
+  $property: "padding",
+  $coefficients: $default-size-coefficients
+) {
+  #{$property}: $value;
+
+  @each $breakpoint, $coefficient in $coefficients {
+    @include mq($breakpoint) {
+      @if type-of($value) == list {
+        $list-space: ();
+
+        @each $value in $value {
+          $list-space: append($list-space, $value * $coefficient);
+        }
+
+        #{$property}: $list-space;
+      } @else {
+        #{$property}: $value * $coefficient;
+      }
+    }
+  }
+}
+
+/**
+ * Установка размеров равностороннего элемента
+ *
+ * @param {String} $size - величина стороны
+ */
+@mixin make-square($size) {
+  width: $size;
+  height: $size;
+}
+
+/**
+ * Отмена скругления стороны 
+ * (для создания полукруга, например)
+ *
+ * @param {String} $side - сторона
+ */
+@mixin sharpen-side($side) {
+  @if $side == "top" or $side == "bottom" {
+    border-#{$side}-left-radius: 0;
+    border-#{$side}-right-radius: 0;
+  } @else if $side == "left" or $side == "right" {
+    border-top-#{$side}-radius: 0;
+    border-bottom-#{$side}-radius: 0;
+  }
+}
+
+/**
+ * Добавление transition дефолтной длительности
+ *
+ * @param {String} $property - свойство, которое будет анимироваться
+ */
+@mixin set-default-duration($property) {
+  transition-duration: $default-transition-duration;
+  transition-property: $property;
+}
+
 /* ------------------------------ Placeholders ------------------------------ */
 
 // генерация placeholder-ов из названия шрифта и веса
@@ -82,3 +236,42 @@ $text-sizes: (
 // генерация placeholder-ов из размера текста
 // (например, %text-medium)
 @include create-property-placeholders($text-sizes, font-size, "text");
+
+// генерация placeholder-ов для фона
+// (например, %background-primary)
+@include create-property-placeholders(
+  map.get($colors, object),
+  background-color,
+  "background"
+);
+
+// генерация placeholder-ов для цвета текста
+// (например, %color-secondary-accent)
+@include create-property-placeholders(map.get($colors, text), color, "color");
+
+%radius-softened {
+  border-radius: 0.2rem;
+}
+
+%radius-rounded {
+  border-radius: 0.5rem;
+}
+
+%radius-round {
+  border-radius: 50%;
+}
+
+%overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+%container {
+  pointer-events: none;
+
+  & > * {
+    pointer-events: auto;
+  }
+}
