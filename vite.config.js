@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@": resolve("./src"),
         "@baseComponents": resolve("./src/components/base"),
+        "@directives": resolve("./src/directives"),
         "@styles": resolve("./src/styles"),
         "@views": resolve("./src/views"),
       },
