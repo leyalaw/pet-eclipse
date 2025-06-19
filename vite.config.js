@@ -1,13 +1,18 @@
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
+// плагины
+import createSvgSpritePlugin from "vite-plugin-svg-spriter";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      createSvgSpritePlugin({ svgFolder: "./src/assets/icons" }),
+    ],
     server: {
       proxy:
         mode === "development"
@@ -23,6 +28,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "@": resolve("./src"),
+        "@baseComponents": resolve("./src/components/base"),
         "@styles": resolve("./src/styles"),
         "@views": resolve("./src/views"),
       },

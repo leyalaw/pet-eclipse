@@ -14,6 +14,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "vite-plugin-svg-spriter": "^1.0.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1",
     "vuex": "^4.1.0"
