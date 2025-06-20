@@ -123,12 +123,23 @@ export default {
   }
 
   &__title {
-    @extend %Montserrat-bold;
     @extend %color-secondary-accent;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    @extend %GothamPro-bold;
+
+    font-size: 4rem;
+    margin: 5rem 0 2.8rem;
+    line-height: 1;
+  }
+
+  h2 {
+    @extend %Montserrat-bold;
 
     margin: 4.5rem 0 3rem;
     font-size: 3rem;
-    text-transform: uppercase;
 
     @include mq(sm) {
       font-size: 2.5rem;

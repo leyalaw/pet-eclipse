@@ -28,11 +28,11 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "@": resolve("./src"),
-        "@assets": resolve("./src/assets"),
         "@baseComponents": resolve("./src/components/base"),
         "@buttonTemplates": resolve("./src/components/templates/buttons"),
         "@directives": resolve("./src/directives"),
         "@helpers": resolve("./src/helpers"),
+        "@images": resolve("./src/assets/images"),
         "@layouts": resolve("./src/layouts"),
         "@sectionTemplates": resolve("./src/components/templates/sections"),
         "@styles": resolve("./src/styles"),

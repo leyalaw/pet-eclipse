@@ -1,4 +1,7 @@
+// основное
 import { defineComponent, h } from "vue";
+// изображения
+import designImage from "@images/Home/design.png";
 
 /* -------------------------------------------------------------------------- */
 /*                     Настройка содержимого секции Design                    */
@@ -7,6 +10,7 @@ import { defineComponent, h } from "vue";
 export default defineComponent({
   name: "DesignContent",
   setup() {
-    return () => h("div");
+    // "обрезанное" изображение
+    return () => h("img", { src: designImage, alt: "" });
   },
 });

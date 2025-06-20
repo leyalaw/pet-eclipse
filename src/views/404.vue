@@ -20,7 +20,7 @@ export default {
 <style>
 .empty-page {
   .hero-section__background {
-    background-image: url(@assets/images/empty/background.avif);
+    background-image: url(@images/empty/background.avif);
   }
 }
 </style>

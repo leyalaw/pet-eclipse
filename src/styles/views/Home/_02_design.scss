@@ -1,0 +1,54 @@
+.design-section {
+  $background-color: #f5f7f9;
+  $circle: radial-gradient(
+    circle,
+    transparent 6px,
+    #f1f4f7 2px,
+    transparent 12px
+  );
+
+  .dropdown-section {
+    &__toggler {
+      background-color: $background-color;
+
+      &:not(:active, :hover) {
+        svg {
+          fill: #96a5b4;
+        }
+      }
+    }
+
+    &__background {
+      background-color: $background-color;
+      background-size: 6rem 6rem;
+      background-repeat: repeat;
+      background-position: 0 3rem, 3rem 0;
+      background-image: $circle, $circle;
+    }
+
+    &__content {
+      padding-bottom: 0;
+    }
+
+    // по-хорошему надо бы создать отдельный блок для изображения,
+    // но на данный момент не вижу необходимости
+    // (в теле секции ничего нового все равно не будет)
+    &__body {
+      height: 24rem;
+      margin: 7rem auto 0;
+      // подгон $additional-color (за отсутствием svg-изображения)
+      filter: invert(63%) sepia(84%) saturate(430%) hue-rotate(128deg)
+        brightness(93%) contrast(81%);
+
+      @include mq(xs) {
+        height: 20rem;
+      }
+
+      img {
+        @include mq(sm) {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
