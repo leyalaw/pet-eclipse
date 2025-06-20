@@ -1,5 +1,9 @@
 <template>
-  <section class="dropdown-section">
+  <BaseModalPageSection
+    tag="section"
+    class="dropdown-section"
+    :style-classes="{ background: 'dropdown-section__background' }"
+  >
     <!-- КНОПКА ОТКРЫТИЯ/ЗАКРЫТИЯ СЕКЦИИ -->
     <div class="dropdown-section__toggler-block">
       <DropdownButtonTemplate
@@ -34,7 +38,7 @@
         <slot></slot>
       </SectionContentTemplate>
     </div>
-  </section>
+  </BaseModalPageSection>
 </template>
 
 <script>
@@ -43,12 +47,14 @@
 /* -------------------------------------------------------------------------- */
 
 // компоненты
+import BaseModalPageSection from "@baseComponents/BaseModal/BaseModalPageSection.vue";
 import DropdownButtonTemplate from "@buttonTemplates/DropdownButtonTemplate.vue";
 import SectionContentTemplate from "./SectionContentTemplate.vue";
 
 export default {
   name: "DropdownSectionTemplate",
   components: {
+    BaseModalPageSection,
     DropdownButtonTemplate,
     SectionContentTemplate,
   },

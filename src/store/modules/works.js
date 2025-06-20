@@ -1,11 +1,10 @@
-// основное
-import { createStore } from "vuex";
+import getFetchAction from "@helpers/getFetchAction";
 
 /* -------------------------------------------------------------------------- */
-/*                                  Хранилище                                 */
+/*                       Хранилище работ и их категорий                       */
 /* -------------------------------------------------------------------------- */
 
-export default createStore({
+export default {
   state: {
     lines: [],
     works: [],
@@ -33,12 +32,12 @@ export default createStore({
 
   actions: {
     /** Получить направления */
-    fetchLines: fetchActions({
+    fetchLines: getFetchAction({
       url: "/api/lines",
       commitName: "SET_LINES",
     }),
     /** Получить работы */
-    fetchWorks: fetchActions({
+    fetchWorks: getFetchAction({
       url: "/api/works",
       commitName: "SET_WORKS",
     }),
@@ -57,12 +56,4 @@ export default createStore({
       state.works = works;
     },
   },
-});
-
-function fetchActions({ url, commitName }) {
-  return async ({ commit }) => {
-    const response = await fetch(url);
-    const data = await response.json();
-    commit(commitName, data);
-  };
-}
+};

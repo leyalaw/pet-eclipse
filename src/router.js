@@ -1,5 +1,6 @@
 // основное
 import { createRouter, createWebHistory } from "vue-router";
+import store from "./store/index";
 // страницы
 import HomePage from "@views/Home/index";
 import EmptyPage from "@views/404.vue";
@@ -34,6 +35,12 @@ const routes = currentRoutes.map((route) =>
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// закрытие панели меню при переходе на новую страницу
+router.beforeEach((to, from, next) => {
+  store.dispatch("hideModals");
+  next();
 });
 
 export default router;

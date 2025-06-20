@@ -34,6 +34,7 @@ export default {
         return items.every(hasRequiredKeys);
       },
     },
+    /** Классы элементов */
     styleClasses: {
       type: Object,
       default: () => ({

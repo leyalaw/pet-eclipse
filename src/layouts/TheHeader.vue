@@ -8,7 +8,16 @@
         </router-link>
 
         <!-- МЕНЮ -->
-        <MainMenu :items="menuItems" />
+        <!-- выезжающее меню -->
+        <MainOverlayMenu
+          v-show="isMobile"
+          :open="isModalMenuOpen"
+          :items="menuItems"
+          @slide-in="onSlideIn"
+          @slide-out="onSlideOut"
+        />
+        <!-- обычное меню -->
+        <MainBlockMenu v-show="!isMobile" :items="menuItems" />
       </nav>
     </div>
   </header>
@@ -19,14 +28,21 @@
 /*                                    Хедер                                   */
 /* -------------------------------------------------------------------------- */
 
+// основное
+import { mapGetters } from "vuex";
+// хелпер
+import handleMediaQuery from "@helpers/handleMediaQuery";
+// компоненты
 import BaseSvgIcon from "@baseComponents/BaseSvgIcon.vue";
-import MainMenu from "@ui/menu/MainMenu.vue";
+import MainOverlayMenu from "@ui/menu/MainMenu/MainOverlayMenu.vue";
+import MainBlockMenu from "@ui/menu/MainMenu/MainBlockMenu.vue";
 
 export default {
   name: "TheHeader",
   components: {
     BaseSvgIcon,
-    MainMenu,
+    MainOverlayMenu,
+    MainBlockMenu,
   },
   /* ---------------------------------- Data ---------------------------------- */
   data() {
@@ -37,7 +53,42 @@ export default {
         { to: "/pricing", title: "Pricing" },
         { to: "/blog", title: "Blog" },
       ],
+      isMobile: false,
     };
+  },
+  /* -------------------------------- Computed -------------------------------- */
+  computed: {
+    ...mapGetters(["isModalMenuOpen"]),
+  },
+  /* ---------------------------------- Watch --------------------------------- */
+  watch: {
+    // начальное состояние выезжающего меню всегда спрятанное
+    isMobile(newValue) {
+      this.setModalMenuVisibility(false);
+    },
+  },
+  /* --------------------------------- Created -------------------------------- */
+  created() {
+    const query = `${this.$maxWidthMq.md} and (orientation: portrait)`;
+
+    // бургер-меню на малых экранах при портретной ориентации
+    handleMediaQuery(
+      (mediaQuery) => (this.isMobile = mediaQuery === query),
+      query
+    );
+  },
+  /* --------------------------------- Methods -------------------------------- */
+  methods: {
+    onSlideIn() {
+      this.setModalMenuVisibility(true);
+    },
+    onSlideOut() {
+      this.setModalMenuVisibility(false);
+    },
+    /** Установить статус видимости меню для проекта */
+    setModalMenuVisibility(isIn) {
+      this.$store.dispatch(isIn ? "showModalMenu" : "hideModalMenu");
+    },
   },
 };
 </script>

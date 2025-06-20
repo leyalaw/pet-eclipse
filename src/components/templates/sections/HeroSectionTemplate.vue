@@ -1,8 +1,9 @@
 <template>
-  <section class="hero-section">
-    <!-- ФОН -->
-    <div class="hero-section__background"></div>
-
+  <BaseModalPageSection
+    tag="section"
+    class="hero-section"
+    :style-classes="{ background: 'hero-section__background' }"
+  >
     <!-- КОНТЕНТ -->
     <SectionContentTemplate
       :title="title"
@@ -16,7 +17,7 @@
     >
       <slot></slot>
     </SectionContentTemplate>
-  </section>
+  </BaseModalPageSection>
 </template>
 
 <script>
@@ -24,11 +25,13 @@
 /*                    Шаблон секции с фоновым изображением                    */
 /* -------------------------------------------------------------------------- */
 
+import BaseModalPageSection from "@baseComponents/BaseModal/BaseModalPageSection.vue";
 import SectionContentTemplate from "./SectionContentTemplate.vue";
 
 export default {
   name: "HeroSectionTemplate",
   components: {
+    BaseModalPageSection,
     SectionContentTemplate,
   },
   /* ---------------------------------- Props --------------------------------- */
