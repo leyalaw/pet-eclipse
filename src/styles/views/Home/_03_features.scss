@@ -1,0 +1,15 @@
+.features-section {
+  .dropdown-section {
+    &__toggler {
+      @extend %background-secondary;
+
+      svg {
+        fill: map.get($colors, text, primary);
+      }
+    }
+
+    &__body {
+      padding-bottom: 2.5rem;
+    }
+  }
+}

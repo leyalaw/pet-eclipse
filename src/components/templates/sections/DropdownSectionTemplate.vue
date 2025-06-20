@@ -138,7 +138,7 @@ export default {
   h2 {
     @extend %Montserrat-bold;
 
-    margin: 4.5rem 0 3rem;
+    margin: 9rem 0 3rem;
     font-size: 3rem;
 
     @include mq(sm) {
