@@ -47,6 +47,8 @@ $default-size-coefficients: (
   md: 0.7,
 );
 
+$default-padding: 2rem;
+
 $durations: (
   long: 2s,
   calm: 1s,
@@ -112,9 +114,10 @@ $default-transition-duration: map.get($durations, short);
 /**
  * Центрирование элементов флекс-блоков
  *
- * @param {String} $axis - ось центрирования: 
+ * @param $axis - ось центрирования: 
  * x, y, "" (по умолчанию - по обеим осям)
- * @param {String} $direction - направление оси: 
+ *
+ * @param $direction - направление оси: 
  * row (по умолчанию), column
  */
 @mixin set-flex-center($axis: "", $direction: row) {
@@ -147,7 +150,7 @@ $default-transition-duration: map.get($durations, short);
  * Вычисление центра по стороне
  * (чтобы не "занимать" transform)
  *
- * @param {Number} $size - величина стороны
+ * @param $size - величина стороны
  */
 @function get-center($size) {
   @return calc(50% - ($size / 2));
@@ -156,8 +159,10 @@ $default-transition-duration: map.get($durations, short);
 /**
  * Установка меняющегося размером свойства
  *
- * @param {String} $value - значение свойства по умолчанию
- * @param {String} $property - свойство
+ * @param $value - значение свойства по умолчанию
+ *
+ * @param $property - свойство
+ *
  * @param {Map} $coefficients - брейкоинты и коэффициенты
  */
 @mixin set-responsive-property(
@@ -185,9 +190,66 @@ $default-transition-duration: map.get($durations, short);
 }
 
 /**
+ * Установка позиции боковой иконки
+ *
+ * @param $icon-size - величина иконки
+ *
+ * @param $side - сторона от контента: left, right (по умолчанию)
+ *
+ * @param $from-border - расстояние от границы блока
+ * (по умолчанию $default-padding)
+ *
+ * @param $from-content - расстояние от содержимого блока
+ * (по умолчанию $default-padding)
+ *
+ * @param $responsive - нужна ли дефолтная адаптивность
+ * (по умолчанию true): 
+ * set-responsive-property($coefficients: $default-size-coefficients)
+ *
+ * @param $icon-block - блок с иконкой (по умолчанию иконка без блока)
+ */
+@mixin set-side-icon-position(
+  $icon-size,
+  $side: "right",
+  $from-border: $default-padding,
+  $from-content: $default-padding,
+  $responsive: true,
+  $icon-block: ""
+) {
+  position: relative;
+
+  @if $side != "left" and $side != "right" {
+    $side: "right";
+  }
+
+  @if $from-content != null {
+    $side-padding: calc($from-border + $icon-size + $from-content);
+
+    @if $responsive {
+      @include set-responsive-property($side-padding, "padding-#{$side}");
+    } @else {
+      padding-#{$side}: $side-padding;
+    }
+  }
+
+  & > #{$icon-block} svg {
+    @include make-square($icon-size);
+
+    position: absolute;
+    top: get-center($icon-size);
+
+    @if $responsive {
+      @include set-responsive-property($from-border, $side);
+    } @else {
+      #{$side}: $from-border;
+    }
+  }
+}
+
+/**
  * Установка размеров равностороннего элемента
  *
- * @param {String} $size - величина стороны
+ * @param $size - величина стороны
  */
 @mixin make-square($size) {
   width: $size;
@@ -198,7 +260,7 @@ $default-transition-duration: map.get($durations, short);
  * Отмена скругления стороны 
  * (для создания полукруга, например)
  *
- * @param {String} $side - сторона
+ * @param $side - сторона
  */
 @mixin sharpen-side($side) {
   @if $side == "top" or $side == "bottom" {
@@ -213,7 +275,7 @@ $default-transition-duration: map.get($durations, short);
 /**
  * Добавление transition дефолтной длительности
  *
- * @param {String} $property - свойство, которое будет анимироваться
+ * @param $property - свойство, которое будет анимироваться
  */
 @mixin set-default-duration($property) {
   transition-duration: $default-transition-duration;

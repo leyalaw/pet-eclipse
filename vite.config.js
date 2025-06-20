@@ -32,10 +32,12 @@ export default defineConfig(({ mode }) => {
         "@baseComponents": resolve("./src/components/base"),
         "@buttonTemplates": resolve("./src/components/templates/buttons"),
         "@directives": resolve("./src/directives"),
+        "@layouts": resolve("./src/layouts"),
         "@sectionTemplates": resolve("./src/components/templates/sections"),
         "@styles": resolve("./src/styles"),
         "@views": resolve("./src/views"),
         "@viewStyles": resolve("./src/styles/views"),
+        "@ui": resolve("./src/components/ui"),
       },
     },
     css: {
