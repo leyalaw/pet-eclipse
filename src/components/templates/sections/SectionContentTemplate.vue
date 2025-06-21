@@ -6,19 +6,28 @@
         <!-- заголовок -->
         <component
           :is="titleTag"
+          v-aos="['fade', $duration.long]"
           class="section-content__title"
           :class="styleClasses.title"
         >
           {{ title }}
         </component>
         <!-- текст шапки -->
-        <div class="section-content__info" :class="styleClasses.info">
+        <div
+          v-aos="[$duration.short, 'fade', $duration.calm]"
+          class="section-content__info"
+          :class="styleClasses.info"
+        >
           {{ info }}
         </div>
       </div>
 
       <!-- ОСНОВНОЙ КОНТЕНТ -->
-      <div class="section-content__body" :class="styleClasses.body">
+      <div
+        v-aos="[$duration.short, 'fade-up', $duration.calm]"
+        class="section-content__body"
+        :class="styleClasses.body"
+      >
         <slot></slot>
       </div>
     </div>

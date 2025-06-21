@@ -3,6 +3,7 @@
     <!-- МЕНЮ -->
     <BaseRouterMenu
       :items="items"
+      v-aos="['fade-left', $duration.calm]"
       class="main-menu__list"
       :style-classes="{
         item: 'main-menu__item',
@@ -16,6 +17,7 @@
       icon="arrow-circle-thick"
       effect="brightness"
       @click="onJoinButtonClick"
+      v-aos="[$duration.short, 'fade', $duration.long]"
     >
       Join
       <BaseSvgIcon name="arrow-circle-thick" />

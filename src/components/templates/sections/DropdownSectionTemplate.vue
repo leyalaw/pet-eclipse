@@ -10,6 +10,7 @@
         :arrow-up="!isExpanded"
         :rotation-duration="dropdownDuration"
         @click="onTogglerClick"
+        v-aos="['zoom-in', $duration.short]"
         class="dropdown-section__toggler"
       />
     </div>
@@ -46,6 +47,8 @@
 /*                         Шаблон секции с дропдауном                         */
 /* -------------------------------------------------------------------------- */
 
+// стороннее
+import aos from "aos";
 // компоненты
 import BaseModalPageSection from "@baseComponents/BaseModal/BaseModalPageSection.vue";
 import DropdownButtonTemplate from "@buttonTemplates/DropdownButtonTemplate.vue";
@@ -78,6 +81,7 @@ export default {
   methods: {
     onTogglerClick() {
       this.isExpanded = !this.isExpanded;
+      setTimeout(() => aos.refresh(), this.dropdownDuration);
     },
   },
 };

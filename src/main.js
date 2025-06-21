@@ -6,6 +6,7 @@ import store from "./store/index";
 import directives from "@directives/index";
 import styleVars from "@styles/exports/index";
 import "./styles/index.scss";
+import "aos/dist/aos.css";
 
 const app = createApp(App);
 

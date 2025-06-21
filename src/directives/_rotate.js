@@ -59,15 +59,14 @@ export default {
     try {
       const sidesValues = { fromSide, toSide, originalSide };
       for (const sideName in sidesValues) {
-        if (!sides.includes(sidesValues[sideName]))
-          throw new Error(`Wrong ${sideName}`);
+        if (!sides.includes(sidesValues[sideName])) throw new Error(sideName);
       }
 
-      if (typeof isRotated !== "boolean") throw new Error("Wrong isRotated");
+      if (typeof isRotated !== "boolean") throw new Error("isRotated");
 
-      if (typeof duration !== "number") throw new Error("Wrong duration");
+      if (typeof duration !== "number") throw new Error("duration");
     } catch (error) {
-      console.error(error);
+      console.error(`v-rotate received invalid value: ${error.message}`);
       return;
     }
 

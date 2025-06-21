@@ -81,3 +81,12 @@ ul {
     min-width: 300px;
   }
 }
+
+/* ----------------------------------- Aos ---------------------------------- */
+
+[data-aos="bright-in"] {
+  filter: brightness(0);
+  &.aos-animate {
+    filter: brightness(1);
+  }
+}

@@ -6,6 +6,11 @@
 </template>
 
 <script>
+// стороннее
+import AOS from "aos";
+// константы
+import { MIN_AOS_HEIGHT } from "@constants";
+// компоненты
 import TheHeader from "@layouts/TheHeader.vue";
 import TheFixedButtons from "@layouts/TheFixedButtons/TheFixedButtons.vue";
 import TheFooter from "@layouts/TheFooter.vue";
@@ -16,6 +21,14 @@ export default {
     TheHeader,
     TheFixedButtons,
     TheFooter,
+  },
+  mounted() {
+    AOS.init({
+      once: true,
+      // Отключить анимацию при малой высоте экрана:
+      // мешает удобству восприятия информации
+      disable: () => window.innerHeight < MIN_AOS_HEIGHT,
+    });
   },
 };
 </script>

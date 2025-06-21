@@ -3,6 +3,12 @@
     tag="section"
     class="hero-section"
     :style-classes="{ background: 'hero-section__background' }"
+    v-aos="{
+      duration: $duration.long,
+      name: 'bright-in',
+      once: false,
+      mirror: true,
+    }"
   >
     <!-- КОНТЕНТ -->
     <SectionContentTemplate

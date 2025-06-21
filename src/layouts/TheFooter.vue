@@ -1,12 +1,20 @@
 <template>
   <footer class="footer">
     <!-- ИЗОБРАЖЕНИЕ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ -->
-    <div v-if="footerImage" class="footer__image-block">
+    <div
+      v-if="footerImage"
+      v-aos="['fade-right', $duration.calm]"
+      class="footer__image-block"
+    >
       <img :src="footerImage" alt="" class="footer__image" />
     </div>
 
     <!-- КОНТЕНТ ФУТЕРА -->
-    <div class="wrapper">
+    <div
+      v-if="isContentReached"
+      v-aos="['fade', $duration.calm]"
+      class="wrapper"
+    >
       <!-- социальные сети -->
       <Socials :socials="socials" class="footer__socials" />
 
@@ -67,10 +75,42 @@ export default {
           color: "#395799",
         },
       ]),
+      isContentReached: false,
     };
   },
+  /* -------------------------------- Computed -------------------------------- */
   computed: {
     ...mapGetters(["footerImage"]),
+  },
+  /* ---------------------------------- Watch --------------------------------- */
+  watch: {
+    $route() {
+      this.isContentReached = false;
+      window.addEventListener("scroll", this.onScroll);
+      setTimeout(this.onScroll, 0);
+    },
+  },
+  /* --------------------------------- Mounted -------------------------------- */
+  mounted() {
+    window.addEventListener("scroll", this.showContentIfReached);
+    setTimeout(this.onScroll, 0);
+  },
+  /* ------------------------------ BeforeUnmount ----------------------------- */
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.showContentIfReached);
+  },
+  /* --------------------------------- Methods -------------------------------- */
+  methods: {
+    /** Показать контент футера при достижении конца */
+    showContentIfReached() {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100 // для корректной работы на мобильных
+      ) {
+        this.isContentReached = true;
+        window.removeEventListener("scroll", this.onScroll);
+      }
+    },
   },
 };
 </script>

@@ -3,6 +3,7 @@
     :key="icon"
     :title="title"
     :text="text"
+    v-aos="['zoom-in', $duration.calm]"
     class="info-card"
     :style-classes="{
       imageBlock: 'info-card__image-block',

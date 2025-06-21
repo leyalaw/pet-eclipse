@@ -3,7 +3,11 @@
     <div class="wrapper">
       <nav class="header__nav">
         <!-- ЛОГО -->
-        <router-link to="/" class="header__logo">
+        <router-link
+          to="/"
+          v-aos="[$duration.calm, 'fade', $duration.calm]"
+          class="header__logo"
+        >
           <BaseSvgIcon name="logo" />
         </router-link>
 
@@ -15,6 +19,7 @@
           :items="menuItems"
           @slide-in="onSlideIn"
           @slide-out="onSlideOut"
+          v-aos="[$duration.short, 'fade', $duration.calm]"
         />
         <!-- обычное меню -->
         <MainBlockMenu v-show="!isMobile" :items="menuItems" />

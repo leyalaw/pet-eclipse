@@ -1,7 +1,12 @@
 <template>
   <div class="social-list">
     <!-- КНОПКИ СОЦИАЛЬНЫХ СЕТЕЙ -->
-    <SocialButton v-for="button in socials" :key="button.id" v-bind="button" />
+    <SocialButton
+      v-for="(button, index) in socials"
+      :key="button.id"
+      v-bind="button"
+      v-aos="[$duration.short * index, 'fade', $duration.long]"
+    />
   </div>
 </template>
 

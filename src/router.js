@@ -53,12 +53,15 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // закрытие панели меню при переходе на новую страницу
   store.dispatch("hideModals");
-  // установка изображения футера
-  store.dispatch("setFooterImage", to.meta.footerImage);
   window.scrollTo({
     top: 0,
   });
   next();
+});
+
+router.afterEach((to) => {
+  // установка изображения футера
+  store.dispatch("setFooterImage", to.meta.footerImage);
 });
 
 export default router;

@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 /**
  * Генерация placeholder-ов:
  * 
@@ -27,7 +29,7 @@
   @each $key, $value in $map {
     $new-name: if($name == "", $key, "#{$name}-#{$key}");
 
-    @if type-of($value) == map {
+    @if meta.type-of($value) == map {
       @include _recurse-property-map(
         $value,
         $property,

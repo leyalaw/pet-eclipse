@@ -1,6 +1,7 @@
 import dropdown from "@directives/_dropdown";
 import rotate from "@directives/_rotate";
 import columns from "@directives/_columns";
+import aos from "@directives/_aos";
 
 export default [
   // дропдаун
@@ -17,5 +18,10 @@ export default [
   {
     name: "columns",
     directive: columns,
+  },
+  {
+    // анимация на скролле
+    name: "aos",
+    directive: aos,
   },
 ];
