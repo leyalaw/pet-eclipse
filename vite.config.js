@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
         "@": resolve("./src"),
         "@baseComponents": resolve("./src/components/base"),
         "@buttonTemplates": resolve("./src/components/templates/buttons"),
+        "@constants": resolve("./src/constants"),
         "@directives": resolve("./src/directives"),
         "@helpers": resolve("./src/helpers"),
         "@images": resolve("./src/assets/images"),

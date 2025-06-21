@@ -1,0 +1,35 @@
+.guidelines-section {
+  $border-color: #d8e0e8;
+  $border: 1px solid $border-color;
+
+  .dropdown-section {
+    &__toggler {
+      @extend %background-detail-additional;
+
+      &:after {
+        border-left: $border;
+        border-bottom: $border;
+        border-right: $border;
+      }
+
+      &:not(:active, :hover) {
+        svg {
+          fill: $border-color;
+        }
+      }
+    }
+
+    &__background {
+      border-top: $border;
+      background-color: #f6f9fa;
+    }
+
+    h3 {
+      margin-top: 9rem;
+    }
+  }
+
+  .wrapper {
+    overflow: visible;
+  }
+}
