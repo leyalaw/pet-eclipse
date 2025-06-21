@@ -15,19 +15,9 @@ export default {
     lines: (state) => state.lines,
     /** работы */
     works: (state) => state.works,
-    /** группированные работы по направлениям */
-    worksGrouped: (state) =>
-      state.lines.reduce(
-        (acc, line) => ({
-          ...acc,
-          [line.name]: {
-            name: line.name,
-            id: line.id,
-            works: state.works.filter((work) => work.lineId === line.id),
-          },
-        }),
-        {}
-      ),
+    /** работы по id направления */
+    getWorksByLineId: (state, getters) => (lineId) =>
+      getters.works.filter((work) => work.lineId === lineId),
   },
 
   actions: {
@@ -41,10 +31,10 @@ export default {
       url: "/api/works",
       commitName: "SET_WORKS",
     }),
-    /** Получить направления и работы */
-    fetchWorksGrouped: ({ dispatch }) => {
-      dispatch("fetchLines");
-      dispatch("fetchWorks");
+    /** Проверить наличие направлений и работ */
+    ensureLinesAndWorks: ({ dispatch, getters }) => {
+      if (getters.lines.length === 0) dispatch("fetchLines");
+      if (getters.works.length === 0) dispatch("fetchWorks");
     },
   },
 

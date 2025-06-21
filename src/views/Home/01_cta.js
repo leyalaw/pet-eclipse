@@ -1,6 +1,8 @@
 // основное
 import { defineComponent, computed, h } from "vue";
 import { useStore } from "vuex";
+// константы
+import { DESIGN_ID } from "@constants";
 // компоненты
 import CtaForm from "@ui/CtaForm/CtaForm.vue";
 
@@ -10,11 +12,11 @@ import CtaForm from "@ui/CtaForm/CtaForm.vue";
 
 export default defineComponent({
   name: "CtaContent",
-  setup() {
+  setup() {;
     const store = useStore();
 
     const designOptions = computed(() => {
-      const designWorks = store.getters.worksGrouped?.design?.works || [];
+      const designWorks = store.getters.getWorksByLineId(DESIGN_ID) || [];
 
       return designWorks.map((work) => ({
         label: work.title,

@@ -23,8 +23,7 @@ export default defineComponent({
     const store = useStore();
 
     // загружаем работы и категории
-    if (!Object.keys(store.getters.worksGrouped).length)
-      store.dispatch("fetchWorksGrouped");
+    store.dispatch("ensureLinesAndWorks");
 
     /** Данные секций страницы */
     const SECTIONS = Object.freeze([
