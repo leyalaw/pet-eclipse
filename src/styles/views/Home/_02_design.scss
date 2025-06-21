@@ -6,14 +6,23 @@
     #f1f4f7 2px,
     transparent 12px
   );
+  $toggler-color: #96a5b4;
 
   .dropdown-section {
     &__toggler {
       background-color: $background-color;
 
-      &:not(:active, :hover) {
+      &:not(:active, :hover) svg {
+        fill: $toggler-color;
+      }
+
+      @include mq(
+        (
+          hover: none,
+        )
+      ) {
         svg {
-          fill: #96a5b4;
+          fill: $toggler-color;
         }
       }
     }

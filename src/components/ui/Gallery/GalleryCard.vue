@@ -51,7 +51,7 @@ export default {
 
     &__body {
       @include set-responsive-property(2.5rem 6rem 2.5rem 4rem);
-      @include set-side-icon-position(1.6rem);
+      @include set-side-icon-position(1.6rem, $from-border: 4rem);
 
       @extend %background-detail-additional;
       @extend %Montserrat-regular;

@@ -17,6 +17,16 @@
           fill: $border-color;
         }
       }
+
+      @include mq(
+        (
+          hover: none,
+        )
+      ) {
+        svg {
+          fill: $border-color;
+        }
+      }
     }
 
     &__background {

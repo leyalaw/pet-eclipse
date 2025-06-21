@@ -94,7 +94,7 @@ export default {
     }
 
     &:hover,
-    &--active {
+    &.gallery-tabs__header--active {
       @extend %background-secondary;
       @extend %color-primary;
     }

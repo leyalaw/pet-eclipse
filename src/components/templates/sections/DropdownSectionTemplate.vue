@@ -114,7 +114,7 @@ export default {
 
   &__header {
     width: 60%;
-    margin: 0 auto 5rem;
+    margin: 0 auto 4.8rem;
 
     @include mq(lg) {
       width: 80%;
