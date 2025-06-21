@@ -1,5 +1,5 @@
 <template>
-  <BaseCard class="gallery-card" :image="image" :title="title">
+  <BaseCard :image="image" :title="title" class="gallery-card">
     <template #body>
       <BaseSvgIcon name="arrow-short" />
     </template>
@@ -22,6 +22,8 @@ export default {
   },
   /* ---------------------------------- Props --------------------------------- */
   props: {
+    /* Id */
+    id: [String, Number],
     /* Изображение */
     image: String,
     /* Заголовок */
@@ -38,6 +40,7 @@ export default {
   width: 100%;
   border-radius: 0.5rem 0.5rem 1rem 1rem;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 
   .card {
     &__image-block {

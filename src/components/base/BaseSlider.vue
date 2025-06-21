@@ -1,7 +1,11 @@
 <template>
   <div class="slider">
     <!-- ПАГИНАЦИЯ -->
-    <div class="slider__page-buttons" :class="styleClasses.pageButtons">
+    <div
+      v-if="pages"
+      class="slider__page-buttons"
+      :class="styleClasses.pageButtons"
+    >
       <button
         v-for="pageNumber in totalPagesNumber"
         :key="pageNumber"
@@ -20,6 +24,7 @@
     <div class="slider__body">
       <!-- КНОПКА "НАЗАД" -->
       <button
+        v-if="buttons"
         type="button"
         @click="onScrollButtonClick('previous')"
         :disabled="isScrollButtonDisabled('previous')"
@@ -64,6 +69,7 @@
 
       <!-- КНОПКА "ВПЕРЕД" -->
       <button
+        v-if="buttons"
         type="button"
         @click="onScrollButtonClick('next')"
         :disabled="isScrollButtonDisabled('next')"
@@ -148,6 +154,16 @@ export default {
       default: () => [],
       validator: isMediaSlidesAmountValid,
     },
+    /** Отображение кнопок "ВПЕРЕД" и "НАЗАД" */
+    buttons: {
+      type: Boolean,
+      default: false,
+    },
+    /** Отображение пагинации */
+    pages: {
+      type: Boolean,
+      default: false,
+    },
     /** Классы элементов */
     styleClasses: {
       type: Object,
@@ -183,6 +199,8 @@ export default {
       isMouseDown: false,
       scrollStartX: 0,
       scrollTranslation: 0,
+      isSwiping: false,
+      swipeStart: null,
     };
   },
   /* --------------------------------- Created -------------------------------- */
@@ -238,6 +256,23 @@ export default {
     /** Номер текущей страницы */
     currentPageNumber() {
       return Math.ceil(this.firstVisibleSlideIndex / this.pageSlidesAmount + 1);
+    },
+  },
+  watch: {
+    firstVisibleSlideIndex(newValue) {
+      const updateInfo = {
+        activeSlides: this.slides.slice(
+          newValue,
+          newValue + this.slidesAmountToShow
+        ),
+      };
+
+      if (this.pages) updateInfo.page = this.currentPageNumber;
+
+      this.$emit("scroll", updateInfo);
+    },
+    isSwiping(newValue) {
+      this.$emit(newValue ? "swipe-start" : "swipe-end");
     },
   },
   /* ---------------------------------- Methods ------------------------------- */
@@ -345,6 +380,8 @@ export default {
     handleScrollStart(event) {
       // установка точки, относительно которой будет происходить смещение
       this.scrollStartX = this.translation - event.clientX;
+      // установка точки, относительно которой будет происходить смещение
+      this.swipeStart = { x: event.clientX, y: event.clientY };
     },
     /** Обработка движения прокрутки */
     handleScrollMove(event) {
@@ -352,6 +389,14 @@ export default {
       this.scrollTranslation = this.getCorrectTranslation(
         this.scrollStartX + event.clientX
       );
+
+      // проверка на начало прокрутки
+      if (
+        !this.isSwiping &&
+        (Math.abs(this.swipeStart.x - event.clientX) > 10 ||
+          Math.abs(this.swipeStart.y - event.clientY) > 10)
+      )
+        this.isSwiping = true;
     },
     /** Обработка окончания прокрутки */
     handleScrollEnd() {
@@ -364,8 +409,10 @@ export default {
         )
       );
 
-      // сброс динамического смещения
       this.scrollTranslation = 0;
+      this.scrollStartX = 0;
+      this.isSwiping = false;
+      this.swipeStart = null;
     },
     /**
      * Проверка корректности индекса первого отображаемого слайда

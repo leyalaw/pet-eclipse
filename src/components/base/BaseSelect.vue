@@ -169,6 +169,7 @@ export default {
   &__options,
   &__option {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &__trigger {

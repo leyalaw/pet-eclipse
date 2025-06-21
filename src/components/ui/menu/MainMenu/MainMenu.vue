@@ -53,7 +53,7 @@ export default {
   /* --------------------------------- Methods -------------------------------- */
   methods: {
     onJoinButtonClick() {
-      alert("Click!");
+      console.log("Click!");
     },
   },
 };

@@ -58,7 +58,7 @@ export default {
   methods: {
     /** Клик! */
     onClick() {
-      alert("Click!");
+      console.log("Click!");
     },
   },
 };

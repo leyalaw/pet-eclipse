@@ -11,9 +11,10 @@
       <GallerySlider
         v-if="activeItems.length && !isCategoryChanging"
         :slides="activeItems"
+        @swipe-start="isSwiping = true"
         v-slot="{ slide: item }"
       >
-        <GalleryCard :image="item.image" :title="item.title" />
+        <GalleryCard v-bind="item" @click="onItemClick(item)" />
       </GallerySlider>
     </TransitionAppear>
   </GalleryTabs>
@@ -50,6 +51,7 @@ export default {
   data() {
     return {
       isCategoryChanging: false,
+      isSwiping: false,
     };
   },
   /* ---------------------------------- Methods ------------------------------ */
@@ -62,6 +64,14 @@ export default {
       this.$nextTick(() => {
         this.isCategoryChanging = false;
       });
+    },
+    onItemClick(item) {
+      if (this.isSwiping) {
+        this.isSwiping = false;
+        return;
+      }
+
+      console.log(`Clicked: ${item.title}`);
     },
   },
 };

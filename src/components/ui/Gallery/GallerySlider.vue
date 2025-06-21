@@ -4,6 +4,9 @@
     :show="slidesToShow.default"
     :show-media="slidesToShow.media"
     :scroll="slidesToScroll"
+    buttons
+    pages
+    @swipe-start="$emit('swipe-start')"
     class="gallery-slider"
     :style-classes="{
       pageButtons: 'gallery-slider__page-buttons',

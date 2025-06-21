@@ -207,7 +207,7 @@ export default {
       this.$nextTick(() => {
         this.v$.$touch();
         if (!this.v$.$invalid) {
-          alert(`Submitted: ${JSON.stringify(this.formValues)}`);
+          console.log(`Submitted: ${JSON.stringify(this.formValues)}`);
           this.formValues.options = [];
           this.formValues.email = "";
           this.v$.$reset();
