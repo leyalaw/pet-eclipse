@@ -79,14 +79,14 @@ export default {
 
   // кнопка Join
   &__join-button {
-    @include set-responsive-property(1.8rem 3.8rem);
-    @include set-side-icon-position(1.6rem);
-
     @extend %background-primary;
     @extend %GothamPro-bold;
     @extend %text-big;
 
     align-self: center;
+
+    @include set-responsive-property(1.8rem 3.8rem);
+    @include set-side-icon-position(1.6rem);
   }
 }
 </style>

@@ -48,20 +48,21 @@ export default {
   text-align: center;
 
   &__image-block {
-    @include make-square(13.7rem);
     @extend %radius-round;
     @extend %background-primary;
 
     margin: 0 auto 3.2rem;
+
+    @include make-square(13.7rem);
 
     @include mq(md) {
       @include make-square(12rem);
     }
 
     svg {
-      @include make-square(5rem);
-
       fill: map.get($colors, text, primary);
+
+      @include make-square(5rem);
     }
   }
 

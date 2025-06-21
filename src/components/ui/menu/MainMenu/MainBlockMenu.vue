@@ -53,20 +53,21 @@ export default {
     &__link {
       @extend %text-medium;
 
-      @include set-flex-center(y);
-
       position: relative;
+
+      @include set-flex-center(y);
 
       // подчеркивание
       &:after {
         @extend %background-secondary;
-        @include set-default-duration(width);
 
         content: "";
         position: absolute;
         bottom: 0;
         width: 0;
         height: 3px;
+
+        @include set-default-duration(width);
       }
 
       &:hover,

@@ -47,8 +47,11 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         scss: {
           additionalData: `
-          @use "sass:map";
-          @import "@styles/variables.scss";
+          @use "sass:map" as map;
+          @use "sass:list" as list;
+          @use "sass:meta" as meta;
+          @use "sass:color" as color;
+          @use "@styles/variables.scss" as *;
         `,
         },
       },

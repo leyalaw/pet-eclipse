@@ -155,11 +155,11 @@ export default {
   }
 
   .wrapper {
-    @include set-responsive-property(4.5rem, row-gap);
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @include set-responsive-property(4.5rem, row-gap);
   }
 
   p,

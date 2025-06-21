@@ -12,7 +12,7 @@ import CtaForm from "@ui/CtaForm/CtaForm.vue";
 
 export default defineComponent({
   name: "CtaContent",
-  setup() {;
+  setup() {
     const store = useStore();
 
     const designOptions = computed(() => {

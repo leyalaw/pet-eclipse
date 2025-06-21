@@ -77,14 +77,14 @@ export default {
     @extend %GothamPro-bold;
     @extend %text-medium;
 
-    @include set-responsive-property(2rem 3.5rem);
-    @include set-default-duration(background-color color);
-
     border: none;
     background-color: transparent;
     display: inline-block;
     color: map.get($colors, object, secondary);
     text-transform: uppercase;
+
+    @include set-responsive-property(2rem 3.5rem);
+    @include set-default-duration(background-color color);
 
     @include mq(md) {
       width: 50%;

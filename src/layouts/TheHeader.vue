@@ -131,8 +131,9 @@ export default {
 
   &__logo {
     svg {
-      @include make-square(6.8rem);
       fill: map.get($colors, object, secondary);
+
+      @include make-square(6.8rem);
     }
   }
 }

@@ -158,11 +158,11 @@ export default {
   }
 
   &--right {
-    @include set-flex-center(y);
-
     top: 0;
     height: 100%;
     left: $position;
+
+    @include set-flex-center(y);
   }
 }
 
@@ -177,10 +177,11 @@ export default {
   }
 
   &--button {
-    @include make-square(3.5rem);
     @extend %radius-round;
 
     font-size: 2rem;
+
+    @include make-square(3.5rem);
   }
 }
 </style>

@@ -1,4 +1,7 @@
-@import "./helpers";
+@use "sass:map" as map;
+@use "sass:list" as list;
+@use "sass:meta" as meta;
+@use "./helpers" as helpers;
 
 $breakpoints: (
   "xs": 375px,
@@ -73,13 +76,13 @@ $default-transition-duration: map.get($durations, short);
 @mixin mq($condition) {
   $query: "";
 
-  @if type-of($condition) == map {
+  @if meta.type-of($condition) == map {
     // если $condition - map
     $rules: map.keys($condition);
-    $length: length($rules);
+    $length: list.length($rules);
 
     @for $i from 1 through $length {
-      $rule: nth($rules, $i);
+      $rule: list.nth($rules, $i);
       $breakpoint: map.get($condition, $rule);
 
       $query: $query +
@@ -170,15 +173,17 @@ $default-transition-duration: map.get($durations, short);
   $property: "padding",
   $coefficients: $default-size-coefficients
 ) {
-  #{$property}: $value;
+  & {
+    #{$property}: $value;
+  }
 
   @each $breakpoint, $coefficient in $coefficients {
     @include mq($breakpoint) {
-      @if type-of($value) == list {
+      @if meta.type-of($value) == list {
         $list-space: ();
 
         @each $value in $value {
-          $list-space: append($list-space, $value * $coefficient);
+          $list-space: list.append($list-space, $value * $coefficient);
         }
 
         #{$property}: $list-space;
@@ -216,7 +221,9 @@ $default-transition-duration: map.get($durations, short);
   $responsive: true,
   $icon-block: ""
 ) {
-  position: relative;
+  & {
+    position: relative;
+  }
 
   @if $side != "left" and $side != "right" {
     $side: "right";
@@ -264,11 +271,15 @@ $default-transition-duration: map.get($durations, short);
  */
 @mixin sharpen-side($side) {
   @if $side == "top" or $side == "bottom" {
-    border-#{$side}-left-radius: 0;
-    border-#{$side}-right-radius: 0;
+    & {
+      border-#{$side}-left-radius: 0;
+      border-#{$side}-right-radius: 0;
+    }
   } @else if $side == "left" or $side == "right" {
-    border-top-#{$side}-radius: 0;
-    border-bottom-#{$side}-radius: 0;
+    & {
+      border-top-#{$side}-radius: 0;
+      border-bottom-#{$side}-radius: 0;
+    }
   }
 }
 
@@ -278,8 +289,10 @@ $default-transition-duration: map.get($durations, short);
  * @param $property - свойство, которое будет анимироваться
  */
 @mixin set-default-duration($property) {
-  transition-duration: $default-transition-duration;
-  transition-property: $property;
+  & {
+    transition-duration: $default-transition-duration;
+    transition-property: $property;
+  }
 }
 
 /* ------------------------------ Placeholders ------------------------------ */
@@ -297,11 +310,11 @@ $default-transition-duration: map.get($durations, short);
 
 // генерация placeholder-ов из размера текста
 // (например, %text-medium)
-@include create-property-placeholders($text-sizes, font-size, "text");
+@include helpers.create-property-placeholders($text-sizes, font-size, "text");
 
 // генерация placeholder-ов для фона
 // (например, %background-primary)
-@include create-property-placeholders(
+@include helpers.create-property-placeholders(
   map.get($colors, object),
   background-color,
   "background"
@@ -309,7 +322,11 @@ $default-transition-duration: map.get($durations, short);
 
 // генерация placeholder-ов для цвета текста
 // (например, %color-secondary-accent)
-@include create-property-placeholders(map.get($colors, text), color, "color");
+@include helpers.create-property-placeholders(
+  map.get($colors, text),
+  color,
+  "color"
+);
 
 %radius-softened {
   border-radius: 0.2rem;

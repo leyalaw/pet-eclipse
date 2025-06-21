@@ -30,14 +30,14 @@ export default {
 .default-button {
   $text-color: map.get($colors, text, primary);
 
-  @include set-flex-center();
-  @include set-default-duration(filter);
-
   @extend %radius-rounded;
 
   outline: none;
   border: none;
   color: $text-color;
+
+  @include set-flex-center();
+  @include set-default-duration(filter);
 
   &--brightness {
     filter: brightness(1);

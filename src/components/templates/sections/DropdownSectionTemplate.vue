@@ -92,8 +92,6 @@ export default {
 .dropdown-section {
   // блок кнопки открытия/закрытия секции
   &__toggler-block {
-    @include set-flex-center(x);
-
     @extend %container;
 
     position: absolute;
@@ -101,8 +99,9 @@ export default {
     left: 0;
     width: 100%;
     z-index: 500;
-
     transform: translateY(-50%);
+
+    @include set-flex-center(x);
   }
 
   &__content {

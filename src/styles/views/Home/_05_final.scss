@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "@styles/variables.scss" as *;
+
 .final-section {
   .hero-section {
     &__background {
@@ -12,15 +15,15 @@
       order: -1;
 
       & > svg {
-        @include make-square(17.7rem);
-
         margin-right: 4.5rem;
         fill: map.get($colors, object, secondary);
 
-        @include mq(lg) {
-          @include make-square(14rem);
+        @include make-square(17.7rem);
 
+        @include mq(lg) {
           margin-right: 3rem;
+
+          @include make-square(14rem);
         }
 
         @include mq(md) {

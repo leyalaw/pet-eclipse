@@ -72,14 +72,14 @@ export default {
   }
 
   &__content {
-    @include set-flex-center(y, column);
-    @include set-responsive-property(18.6rem 0 12rem, padding);
-
     @extend %color-primary;
     @extend %text-big;
 
     min-height: 100vh;
     line-height: 2.4rem;
+
+    @include set-flex-center(y, column);
+    @include set-responsive-property(18.6rem 0 12rem, padding);
   }
 
   &__header {

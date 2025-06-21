@@ -33,9 +33,6 @@ export default {
 <style lang="scss">
 /* ---------------------------------- Style --------------------------------- */
 .fixed-buttons {
-  @include set-flex-center(y);
-  @include set-default-duration(margin);
-
   @extend %overlay;
   @extend %GothamPro-bold;
   @extend %color-primary;
@@ -45,6 +42,9 @@ export default {
   position: fixed;
   justify-content: space-between;
   z-index: 500;
+
+  @include set-flex-center(y);
+  @include set-default-duration(margin);
 
   .fixed-buttons__divider {
     pointer-events: none;

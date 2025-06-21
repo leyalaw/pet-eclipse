@@ -1,5 +1,5 @@
-@import "01_cta";
-@import "02_design";
-@import "03_features";
-@import "04_guidelines";
-@import "05_final";
+@use "01_cta" as cta;
+@use "02_design" as design;
+@use "03_features" as features;
+@use "04_guidelines" as guidelines;
+@use "05_final" as final;

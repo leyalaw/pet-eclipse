@@ -34,6 +34,9 @@ export default {
 <style lang="scss">
 /* ---------------------------------- Style --------------------------------- */
 .social-button {
+  @extend %Firasans-bold;
+  @extend %text-small;
+
   @include set-responsive-property(1rem 2rem);
   @include set-side-icon-position(
     1.6rem,
@@ -41,8 +44,5 @@ export default {
     $from-border: 1.5rem,
     $from-content: 1rem
   );
-
-  @extend %Firasans-bold;
-  @extend %text-small;
 }
 </style>

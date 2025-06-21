@@ -73,13 +73,13 @@ export default {
   transform: translateY(-180%) rotate(-90deg);
 
   &__button {
-    @include set-responsive-property(2rem 4rem);
-    @include sharpen-side(bottom);
-
     @extend %background-primary;
 
     max-width: 20rem;
     word-break: break-all;
+
+    @include set-responsive-property(2rem 4rem);
+    @include sharpen-side(bottom);
   }
 }
 </style>

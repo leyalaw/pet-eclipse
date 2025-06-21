@@ -47,7 +47,6 @@ export default {
   $size: 11rem;
 
   @extend %radius-round;
-  @include make-square($size);
 
   position: relative;
   display: flex;
@@ -55,15 +54,17 @@ export default {
   border: none;
   -webkit-tap-highlight-color: rgba(#000, 0);
 
+  @include make-square($size);
+
   // верхний и нижний полукруги
   &:before,
   &:after {
-    @include set-default-duration(background-color);
-
     content: "";
     height: 50%;
     width: 100%;
     border-radius: $size;
+
+    @include set-default-duration(background-color);
   }
 
   // верхний полукруг
@@ -81,11 +82,11 @@ export default {
     $size: 30%;
     $center: get-center($size);
 
-    @include make-square($size);
-
     position: absolute;
     top: $center;
     left: $center;
+
+    @include make-square($size);
   }
 
   &:active {

@@ -80,9 +80,9 @@ export default {
 
   // слайдер
   &__track {
-    @include set-default-duration(transform);
-
     margin: 0 calc(#{$gap} / 2 * -1);
+
+    @include set-default-duration(transform);
   }
 
   &__slide {
@@ -92,11 +92,11 @@ export default {
   &__scroll-button {
     $size: 1.6rem;
 
-    @include make-square($size);
-
     border: none;
     background: none;
     top: get-center($size);
+
+    @include make-square($size);
 
     &[disabled] {
       opacity: 0;
@@ -107,9 +107,10 @@ export default {
     }
 
     svg {
-      @include make-square($size);
       fill: $details-color;
       opacity: 0.5;
+
+      @include make-square($size);
 
       &:hover {
         opacity: 1;

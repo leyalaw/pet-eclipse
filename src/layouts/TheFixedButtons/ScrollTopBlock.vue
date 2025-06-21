@@ -86,18 +86,18 @@ export default {
   }
 
   &__button {
-    @include set-responsive-property(1.6rem);
-
     @extend %background-detail-accent;
+
+    @include set-responsive-property(1.6rem);
 
     @include mq(xl) {
       @include sharpen-side(left);
     }
 
     svg {
-      @include make-square(1.8rem);
-
       transform: rotate(-90deg);
+
+      @include make-square(1.8rem);
     }
   }
 }

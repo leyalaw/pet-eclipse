@@ -270,14 +270,13 @@ export default {
   }
 
   &__option {
+    background-color: rgba(map.get($colors, object, detail, additional), 0.7);
+
     @include set-default-duration(background-color color);
     @include set-responsive-property(
       calc($default-padding / 2) $default-padding,
       padding
     );
-
-    background-color: rgba(map.get($colors, object, detail, additional), 0.7);
-
     &:hover {
       background-color: rgba(map.get($colors, object, detail, additional), 0.9);
     }

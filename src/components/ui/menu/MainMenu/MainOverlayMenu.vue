@@ -84,9 +84,9 @@ export default {
     position: absolute;
     padding: 2.5rem;
     text-align: right;
-    background-color: darken(
+    background-color: color.adjust(
       rgba(map.get($colors, object, secondary), 0.9),
-      30%
+      $lightness: -30%
     );
   }
 
