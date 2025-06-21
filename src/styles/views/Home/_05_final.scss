@@ -3,5 +3,30 @@
     &__background {
       background-image: url(@images/Home/background-final.jpg);
     }
+
+    &__body {
+      order: -1;
+
+      & > svg {
+        @include make-square(17.7rem);
+
+        margin-right: 4.5rem;
+        fill: map.get($colors, object, secondary);
+
+        @include mq(lg) {
+          @include make-square(14rem);
+
+          margin-right: 3rem;
+        }
+
+        @include mq(md) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    display: flex;
   }
 }

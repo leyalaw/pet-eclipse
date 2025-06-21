@@ -1,4 +1,7 @@
+// основное
 import { defineComponent, h } from "vue";
+// компоненты
+import BaseSvgIcon from "@baseComponents/BaseSvgIcon.vue";
 
 /* -------------------------------------------------------------------------- */
 /*                     Настройка содержимого секции Final                     */
@@ -7,6 +10,7 @@ import { defineComponent, h } from "vue";
 export default defineComponent({
   name: "FinalContent",
   setup() {
-    return () => h("div");
+    // лого
+    return () => h(BaseSvgIcon, { name: "logo" });
   },
 });
