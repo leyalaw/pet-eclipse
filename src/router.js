@@ -4,8 +4,6 @@ import store from "./store/index";
 // страницы
 import HomePage from "@views/Home/index";
 import EmptyPage from "@views/404.vue";
-// изображения
-import homeFooterImage from "@images/Home/before-footer.png";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Роутер                                   */
@@ -16,7 +14,7 @@ const currentRoutes = [
     path: "/",
     name: "home",
     component: HomePage,
-    meta: { footerImage: homeFooterImage },
+    meta: { footerImage: "/images/Home/before-footer.png" },
   },
   { path: "/about", name: "about" },
   { path: "/studio", name: "studio" },

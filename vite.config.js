@@ -33,7 +33,6 @@ export default defineConfig(({ mode }) => {
         "@constants": resolve("./src/constants"),
         "@directives": resolve("./src/directives"),
         "@helpers": resolve("./src/helpers"),
-        "@images": resolve("./src/assets/images"),
         "@layouts": resolve("./src/layouts"),
         "@sectionTemplates": resolve("./src/components/templates/sections"),
         "@styles": resolve("./src/styles"),
