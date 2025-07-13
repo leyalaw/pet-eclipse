@@ -7,6 +7,7 @@
         <component
           :is="titleTag"
           v-aos="['fade', $duration.long]"
+          :id="titleId ?? null"
           class="section-content__title"
           :class="styleClasses.title"
         >
@@ -45,6 +46,8 @@ export default {
   props: {
     /** Текст заголовка */
     title: String,
+    /** Id заголовка */
+    titleId: [String, Number],
     /** Уровень заголовка h, без значения заголовок будет иметь тег p */
     titleLevel: Number,
     /** Текст хедера секции */

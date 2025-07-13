@@ -1,13 +1,17 @@
 <template>
-  <button type="button" class="dropdown-button">
+  <button
+    type="button"
+    class="rotation-button"
+    :style="{ '--diameter': diameter }"
+  >
     <BaseSvgIcon
-      name="arrow-circle-thin"
       v-rotate:right.clockwise="{
         rotated: arrowUp,
         from: 'bottom',
         to: 'top',
         duration: rotationDuration,
       }"
+      name="arrow-circle-thin"
     />
   </button>
 </template>
@@ -20,7 +24,7 @@
 import BaseSvgIcon from "@baseComponents/BaseSvgIcon.vue";
 
 export default {
-  name: "DropdownButtonTemplate",
+  name: "RotationButtonTemplate",
   components: {
     BaseSvgIcon,
   },
@@ -36,15 +40,19 @@ export default {
       type: Number,
       default: 500,
     },
+    /** Размер кнопки */
+    diameter: {
+      type: String,
+      default: "10rem",
+    },
   },
 };
 </script>
 
 <style lang="scss">
-.dropdown-button {
+.rotation-button {
   /* ---------------------------------- Style --------------------------------- */
   $action-background: rgba(#000, 0.1);
-  $size: 11rem;
 
   @extend %radius-round;
 
@@ -54,7 +62,7 @@ export default {
   border: none;
   -webkit-tap-highlight-color: rgba(#000, 0);
 
-  @include make-square($size);
+  @include make-square(var(--diameter));
 
   // верхний и нижний полукруги
   &:before,
@@ -62,7 +70,7 @@ export default {
     content: "";
     height: 50%;
     width: 100%;
-    border-radius: $size;
+    border-radius: var(--diameter);
 
     @include set-default-duration(background-color);
   }

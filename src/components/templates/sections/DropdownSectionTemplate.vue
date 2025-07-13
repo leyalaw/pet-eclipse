@@ -1,16 +1,22 @@
 <template>
   <BaseModalPageSection
     tag="section"
+    :aria-labelledby="TITLE_ID"
     class="dropdown-section"
     :style-classes="{ background: 'dropdown-section__background' }"
   >
     <!-- КНОПКА ОТКРЫТИЯ/ЗАКРЫТИЯ СЕКЦИИ -->
     <div class="dropdown-section__toggler-block">
-      <DropdownButtonTemplate
-        :arrow-up="!isExpanded"
-        :rotation-duration="dropdownDuration"
-        @click="onTogglerClick"
+      <RotationButtonTemplate
         v-aos="['zoom-in', $duration.short]"
+        :arrow-up="!isExpanded"
+        :rotation-duration="DROPDOWN_DURATION"
+        :diameter="TOGGLER_DIAMETER"
+        :aria-controls="DROPDOWN_ID"
+        :aria-expanded="isExpanded"
+        :aria-pressed="isExpanded"
+        aria-label="Toggle section visibility"
+        @click="onTogglerClick"
         class="dropdown-section__toggler"
       />
     </div>
@@ -19,16 +25,20 @@
     <div
       v-dropdown="{
         expanded: isExpanded,
-        duration: dropdownDuration,
+        duration: DROPDOWN_DURATION,
       }"
-      style="min-height: 11rem"
+      :id="DROPDOWN_ID"
+      :aria-hidden="!isExpanded"
+      :style="{ minHeight: TOGGLER_DIAMETER }"
     >
       <SectionContentTemplate
         :title-level="titleLevel"
         :title="title"
+        :title-id="TITLE_ID"
         :info="info"
-        style="transition: opacity 1s"
-        :style="{ opacity: isExpanded ? 1 : 0 }"
+        :style="{
+          opacity: isExpanded ? 1 : 0,
+        }"
         class="dropdown-section__content"
         :style-classes="{
           header: 'dropdown-section__header',
@@ -49,16 +59,17 @@
 
 // стороннее
 import aos from "aos";
+import { v4 as uuidv4 } from "uuid";
 // компоненты
 import BaseModalPageSection from "@baseComponents/BaseModal/BaseModalPageSection.vue";
-import DropdownButtonTemplate from "@buttonTemplates/DropdownButtonTemplate.vue";
+import RotationButtonTemplate from "@buttonTemplates/RotationButtonTemplate.vue";
 import SectionContentTemplate from "./SectionContentTemplate.vue";
 
 export default {
   name: "DropdownSectionTemplate",
   components: {
     BaseModalPageSection,
-    DropdownButtonTemplate,
+    RotationButtonTemplate,
     SectionContentTemplate,
   },
   /* ---------------------------------- Props --------------------------------- */
@@ -73,7 +84,11 @@ export default {
   /* ---------------------------------- Data ---------------------------------- */
   data() {
     return {
-      dropdownDuration: this.$duration.calm,
+      TOGGLER_DIAMETER: "11rem",
+      DROPDOWN_DURATION: this.$duration.calm,
+      DROPDOWN_ID: uuidv4(),
+      TITLE_ID: uuidv4(),
+
       isExpanded: true,
     };
   },
@@ -81,7 +96,7 @@ export default {
   methods: {
     onTogglerClick() {
       this.isExpanded = !this.isExpanded;
-      setTimeout(() => aos.refresh(), this.dropdownDuration);
+      setTimeout(() => aos.refresh(), this.DROPDOWN_DURATION);
     },
   },
 };
@@ -113,6 +128,8 @@ export default {
     text-align: center;
     line-height: 2.5rem;
     letter-spacing: 0.1px;
+
+    @include set-default-duration(opacity);
   }
 
   &__header {
