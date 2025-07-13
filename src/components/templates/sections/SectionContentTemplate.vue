@@ -4,15 +4,15 @@
       <!-- ШАПКА СЕКЦИИ -->
       <div class="section-content__header" :class="styleClasses.header">
         <!-- заголовок -->
-        <component
-          :is="titleTag"
+        <BaseTitle
+          :level="titleLevel"
           v-aos="['fade', $duration.long]"
           :id="titleId ?? null"
           class="section-content__title"
           :class="styleClasses.title"
         >
           {{ title }}
-        </component>
+        </BaseTitle>
         <!-- текст шапки -->
         <div
           v-aos="[$duration.short, 'fade', $duration.calm]"
@@ -40,8 +40,13 @@
 /*                           Шаблон контента секции                           */
 /* -------------------------------------------------------------------------- */
 
+import BaseTitle from "@baseComponents/BaseTitle";
+
 export default {
   name: "SectionContentTemplate",
+  components: {
+    BaseTitle,
+  },
   /* ---------------------------------- Props --------------------------------- */
   props: {
     /** Текст заголовка */
@@ -61,20 +66,6 @@ export default {
         info: "",
         body: "",
       }),
-    },
-  },
-  /* -------------------------------- Computed -------------------------------- */
-  computed: {
-    /** Тег заголовка */
-    titleTag() {
-      if (
-        Number.isInteger(this.titleLevel) &&
-        this.titleLevel >= 1 &&
-        this.titleLevel <= 6
-      )
-        return `h${this.titleLevel}`;
-
-      return "p";
     },
   },
 };
