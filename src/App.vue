@@ -25,9 +25,6 @@ export default {
   mounted() {
     AOS.init({
       once: true,
-      // Отключить анимацию при малой высоте экрана:
-      // мешает удобству восприятия информации
-      disable: () => window.innerHeight < MIN_AOS_HEIGHT,
     });
   },
 };
