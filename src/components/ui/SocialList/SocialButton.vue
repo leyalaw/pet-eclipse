@@ -1,6 +1,7 @@
 <template>
   <DefaultButtonTemplate
     effect="brightness"
+    :aria-label="label"
     class="social-button"
     :style="{ backgroundColor: color }"
   >
@@ -27,6 +28,8 @@ export default {
     title: String,
     /* Цвет */
     color: String,
+    /* Aria-label */
+    label: String,
   },
 };
 </script>

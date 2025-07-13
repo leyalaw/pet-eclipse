@@ -1,9 +1,10 @@
 <template>
-  <footer class="footer">
+  <footer tabindex="0" @focus="onFocus" class="footer">
     <!-- ИЗОБРАЖЕНИЕ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ -->
     <div
       v-if="footerImage"
       v-aos="['fade-right', $duration.calm]"
+      aria-hidden="true"
       class="footer__image-block"
     >
       <img :src="footerImage" alt="" class="footer__image" />
@@ -12,11 +13,21 @@
     <!-- КОНТЕНТ ФУТЕРА -->
     <div
       v-if="isContentReached"
-      v-aos="['fade', $duration.calm]"
+      v-aos="{
+        name: 'fade',
+        duration: $duration.calm,
+        offset: 0,
+      }"
       class="wrapper"
     >
       <!-- социальные сети -->
-      <Socials :socials="socials" class="footer__socials" />
+      <Socials
+        ref="socials"
+        :socials="socials"
+        tabindex="0"
+        aria-label="Social networks"
+        class="footer__socials"
+      />
 
       <!-- меню -->
       <AdditionalMenu :items="menuItems" :in-columns="4" class="footer__menu" />
@@ -67,12 +78,14 @@ export default {
           iconId: "social-twitter",
           title: "Tweet",
           color: "#69b6f2",
+          label: "Make a tweet",
         },
         {
           id: "fb",
           iconId: "social-fb",
           title: "Share",
           color: "#395799",
+          label: "Share on facebook",
         },
       ]),
       isContentReached: false,
@@ -81,14 +94,6 @@ export default {
   /* -------------------------------- Computed -------------------------------- */
   computed: {
     ...mapGetters(["footerImage"]),
-  },
-  /* ---------------------------------- Watch --------------------------------- */
-  watch: {
-    $route() {
-      this.isContentReached = false;
-      window.addEventListener("scroll", this.onScroll);
-      setTimeout(this.onScroll, 0);
-    },
   },
   /* --------------------------------- Mounted -------------------------------- */
   mounted() {
@@ -106,10 +111,17 @@ export default {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100 // для корректной работы на мобильных
-      ) {
-        this.isContentReached = true;
-        window.removeEventListener("scroll", this.onScroll);
-      }
+      )
+        this.setContentReached();
+    },
+    onFocus(event) {
+      this.showContentIfReached();
+      this.$nextTick(() => this.$refs.socials.$el.focus());
+    },
+    setContentReached() {
+      this.isContentReached = true;
+      window.removeEventListener("scroll", this.showContentIfReached);
+      event.target.removeAttribute("tabindex");
     },
   },
 };

@@ -1,13 +1,18 @@
 <template>
-  <div class="social-list">
+  <nav class="social-list">
     <!-- КНОПКИ СОЦИАЛЬНЫХ СЕТЕЙ -->
     <SocialButton
       v-for="(button, index) in socials"
       :key="button.id"
+      v-aos="{
+        name: 'fade',
+        delay: $duration.short * index,
+        duration: $duration.long,
+        offset: 0,
+      }"
       v-bind="button"
-      v-aos="[$duration.short * index, 'fade', $duration.long]"
     />
-  </div>
+  </nav>
 </template>
 
 <script>
