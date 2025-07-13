@@ -4,6 +4,7 @@
     :aria-label="label"
     class="social-button"
     :style="{ backgroundColor: color }"
+    @click="onClick"
   >
     <BaseSvgIcon :name="iconId" />
     {{ title }}
@@ -30,6 +31,12 @@ export default {
     color: String,
     /* Aria-label */
     label: String,
+  },
+  /* --------------------------------- Methods -------------------------------- */
+  methods: {
+    onClick() {
+      alert(`Click: ${this.title}`);
+    },
   },
 };
 </script>

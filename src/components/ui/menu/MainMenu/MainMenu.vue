@@ -1,5 +1,5 @@
 <template>
-  <div id="main-menu" class="main-menu" tabindex="0" aria-label="Main menu">
+  <div id="main-menu" class="main-menu" aria-label="Main menu">
     <!-- МЕНЮ -->
     <BaseRouterMenu
       :items="items"
@@ -13,11 +13,12 @@
 
     <!-- КНОПКА JOIN -->
     <DefaultButtonTemplate
-      class="main-menu__join-button"
+      v-aos="[$duration.short, 'fade', $duration.long]"
       icon="arrow-circle-thick"
       effect="brightness"
+      aria-label="Join us"
       @click="onJoinButtonClick"
-      v-aos="[$duration.short, 'fade', $duration.long]"
+      class="main-menu__join-button"
     >
       Join
       <BaseSvgIcon name="arrow-circle-thick" />
@@ -55,7 +56,7 @@ export default {
   /* --------------------------------- Methods -------------------------------- */
   methods: {
     onJoinButtonClick() {
-      console.log("Click!");
+      alert("Click");
     },
   },
 };
