@@ -1,5 +1,5 @@
 <template>
-  <div class="main-menu">
+  <div id="main-menu" class="main-menu" tabindex="0" aria-label="Main menu">
     <!-- МЕНЮ -->
     <BaseRouterMenu
       :items="items"

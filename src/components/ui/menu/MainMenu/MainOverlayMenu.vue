@@ -2,12 +2,16 @@
   <BaseModal
     :open="open"
     from="right"
+    open-label="Open main menu"
+    close-label="Close main menu"
+    open-focus="#main-menu a"
+    close-focus=".main-overlay-menu__button--open"
     @open="$emit('slide-in')"
     @close="$emit('slide-out')"
     class="main-overlay-menu"
     :style-classes="{
       overlay: 'main-overlay-menu__overlay',
-      content: 'main-overlay-menu__content',
+      dialog: 'main-overlay-menu__dialog',
       openButton: 'main-overlay-menu__button--open',
       closeButton: 'main-overlay-menu__button--close',
     }"
@@ -78,7 +82,7 @@ export default {
     }
   }
 
-  &__content {
+  &__dialog {
     @extend %overlay;
 
     position: absolute;
@@ -89,27 +93,27 @@ export default {
       $lightness: -30%
     );
   }
+}
 
-  // меню
-  .main-menu {
-    &__list {
-      margin-bottom: 2rem;
-      text-align: left;
-    }
+// меню
+.modal__dialog .main-menu {
+  &__list {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
 
-    &__item {
-      border-bottom: 1px solid map.get($colors, text, primary);
-      padding: 2rem 0;
-    }
+  &__item {
+    border-bottom: 1px solid map.get($colors, text, primary);
+    padding: 2rem 0;
+  }
 
-    &__link {
-      @extend %text-big;
+  &__link {
+    @extend %text-big;
 
-      &:hover,
-      &:focus,
-      &.router-link-exact-active {
-        color: map.get($colors, object, secondary);
-      }
+    &:hover,
+    &:focus,
+    &.router-link-exact-active {
+      color: map.get($colors, object, secondary);
     }
   }
 }

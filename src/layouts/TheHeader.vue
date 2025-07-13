@@ -4,8 +4,9 @@
       <nav class="header__nav">
         <!-- ЛОГО -->
         <router-link
-          to="/"
           v-aos="[$duration.calm, 'fade', $duration.calm]"
+          to="/"
+          title="Home page"
           class="header__logo"
         >
           <BaseSvgIcon name="logo" />
@@ -15,11 +16,11 @@
         <!-- выезжающее меню -->
         <MainOverlayMenu
           v-show="isMobile"
+          v-aos="[$duration.short, 'fade', $duration.calm]"
           :open="isModalMenuOpen"
           :items="menuItems"
           @slide-in="onSlideIn"
           @slide-out="onSlideOut"
-          v-aos="[$duration.short, 'fade', $duration.calm]"
         />
         <!-- обычное меню -->
         <MainBlockMenu v-show="!isMobile" :items="menuItems" />
