@@ -35,6 +35,10 @@ export default defineComponent({
 
     // карточки
     return () =>
-      h(InfoCards, { class: "features-section__cards", cards: FEATURES });
+      h(InfoCards, {
+        cards: FEATURES,
+        titleLevel: 3,
+        class: "features-section__cards",
+      });
   },
 });

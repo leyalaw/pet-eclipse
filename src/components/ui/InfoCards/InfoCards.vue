@@ -4,6 +4,7 @@
       v-for="card in cards"
       :key="card.icon"
       v-bind="card"
+      :title-level="titleLevel"
       class="info-cards__card"
     />
   </div>
@@ -33,6 +34,8 @@ export default {
         );
       },
     },
+    /** Уровень заголовка h, без значения заголовок будет иметь тег p */
+    titleLevel: Number,
   },
 };
 </script>
