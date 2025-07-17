@@ -1,5 +1,21 @@
-# Vue 3 + Vite
+# Eclipse
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+[Демо](https://pet-eclipse.onrender.com/)
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+SPA на Vue (Option API) и номинальным Express-сервером, возвращающим данные из локальных json-файлов (public/data).
+
+В design лежит psd-макет, на котором основана верстка. Сверстано desktop-first с использованием Pixel Perfect.
+
+[Jpg-изображение макета](design/Eclipse.jpg)
+
+Для валидации формы в секции Hero использован Vuelidate.
+
+За анимацию на скролле отвечает AOS, на его основе написана директива v-aos. Планируется переписать ее с IntersectionObserver без использования сторонних библиотек, так как основной смысл этого проекта - изобретение велосипедов. Велосипеды (нестилизованные наброски компонентов) лежат в components/base, из основного:
+
+- селект/мультиселект,
+- слайдер со свайпом,
+- модальное окно с учетом поведения фона и скроллбара.
+
+Стилизация с SCSS.
+
+На данный момент добавляю доступность, частично уже запушено.
